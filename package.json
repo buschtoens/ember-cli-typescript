@@ -115,7 +115,8 @@
     ],
     "paths": [
       "tests/dummy/lib/in-repo-a",
-      "tests/dummy/lib/in-repo-b"
+      "tests/dummy/lib/in-repo-b",
+      "tests/dummy/lib/in-repo-c"
     ]
   },
   "prettier": {
