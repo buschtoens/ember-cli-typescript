@@ -47,4 +47,21 @@ describe('Acceptance: ts:precompile command', function() {
       expect(transpiled.content.trim()).to.equal(`export const testString = 'hello';`);
     });
   });
+
+  it('copies addon type declarations', function() {
+    fs.ensureDirSync('types/generated/addon');
+    fs.writeFileSync('types/generated/addon/addon-file.d.ts', `export declare const testString: string;`);
+
+    fs.ensureDirSync('types/generated/app');
+    fs.writeFileSync('types/generated/app/app-file.d.ts', `export declare const testString: string;`);
+
+    return ember(['ts:precompile']).then(() => {
+      let addonDeclaration = file('addon-file.d.ts');
+      expect(addonDeclaration).to.exist;
+      expect(addonDeclaration.content.trim()).to.equal(`export declare const testString: string;`);
+
+      let appDeclaration = file('app-file.d.ts');
+      expect(appDeclaration).not.to.exist;
+    });
+  });
 });
