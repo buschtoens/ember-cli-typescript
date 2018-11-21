@@ -1,7 +1,12 @@
 import semver from 'semver';
 import { Remote } from 'stagehand';
 import { connect } from 'stagehand/lib/adapters/child-process';
-import { hasPlugin, addPlugin, AddPluginOptions, BabelPluginConfig } from 'ember-cli-babel-plugin-helpers';
+import {
+  hasPlugin,
+  addPlugin,
+  AddPluginOptions,
+  BabelPluginConfig,
+} from 'ember-cli-babel-plugin-helpers';
 import Addon from 'ember-cli/lib/models/addon';
 import { addon } from './lib/utilities/ember-cli-entities';
 import fork from './lib/utilities/fork';
@@ -19,7 +24,7 @@ export default addon({
     // If we're a direct dependency of the host app, go ahead and start up the
     // typecheck worker so we don't wait until the end of the build to check
     if (this.parent === this.project) {
-      this._getTypecheckWorker();
+      // this._getTypecheckWorker();
     }
   },
 
@@ -36,6 +41,7 @@ export default addon({
     return `${__dirname}/blueprints`;
   },
 
+  /*
   serverMiddleware({ app }) {
     let workerPromise = this._getTypecheckWorker();
     let middleware = new TypecheckMiddleware(this.project, workerPromise);
@@ -58,6 +64,7 @@ export default addon({
       throw new Error('Typechecking failed');
     }
   },
+  */
 
   setupPreprocessorRegistry(type) {
     if (type !== 'parent') return;
